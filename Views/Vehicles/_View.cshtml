@@ -1,0 +1,92 @@
+﻿@model ConstructionApp.ViewModels.VehicleViewModel
+
+<input type="hidden" asp-for="Id" />
+
+<div class="modal-header">
+    <h5 class="modal-title">Dettaglio Veicolo</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
+<div class="modal-body">
+    <div class="row g-4 mb-2">
+        <div class="col-md-6 p-3">
+            <div class="d-flex align-items-center justify-content-center flex-column h-100 border border-primary rounded">
+                <div id="previewContainer" class="text-center p-2">
+                    <img id="picturePreview" src="@(!string.IsNullOrEmpty(Model.PicturePath) ? Url.Content(Model.PicturePath) : "/images/vehicle.svg")"
+                        alt="Picture Preview" style="max-width: 200px;" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 p-3">
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Description:</label>
+                <div class="col-sm-8">
+                    <p class="form-control-plaintext">@Model.Description</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label">Plate:</label>
+                <div class="col-sm-8">
+                    <p class="form-control-plaintext">@Model.Plate</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-2">
+        <div class="col-md-4">
+            <label class="form-label">Assicurazione:</label>
+            <p class="form-control-plaintext">@Model.DateInsurance.ToString("dd/MM/yyy")</p>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Revision:</label>
+            <p class="form-control-plaintext">@Model.DateRevision.ToString("dd/MM/yyy")</p>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Maintenance:</label>
+            <p class="form-control-plaintext">@Model.DateMaintenance.ToString("dd/MM/yyy")</p>
+        </div>
+    </div>
+
+    <hr />
+
+    <!-- Attachments View Section -->
+    <div class="mb-3 d-flex align-items-center">
+        <label class="form-label me-3">Attach</label>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered" id="filesTable">
+            <thead class="table-light">
+                <tr>
+                    <th>FileName</th>
+                    <th>Description</th>
+                    <th>Scadenza</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.AttachFiles.Count; i++)
+                {
+                    var displayStyle = Model.AttachFiles[i].Dumped ? "display:none;" : "";
+                        <tr data-index="@i" style="@displayStyle">
+                            <td>@Model.AttachFiles[i].FileName</td>
+                            <td>@Model.AttachFiles[i].Description</td>
+                            <td>@Model.AttachFiles[i].Deadline.ToString("dd/MM/yyy")</td>
+                            <td>
+                                <input type="hidden" asp-for="@Model.AttachFiles[i].StoredFilePath" />
+                                <button type="button" class="btn btn-info btn-sm view-file">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+</div>

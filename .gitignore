@@ -1,0 +1,6 @@
+/bin
+/.vs
+/.config
+/Migrations
+/obj
+/wwwroot/uploads

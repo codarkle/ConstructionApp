@@ -1,0 +1,22 @@
+﻿<div class="container mt-5" style="max-width:750px">
+    <h2>Materials</h2>
+    <div class="table-responsive">
+        <table id="mainTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@await Html.PartialAsync("_ModalLayout")
+
+@section Scripts {
+    <script src="~/js/material.js" asp-append-version="true"></script> 
+}

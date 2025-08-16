@@ -1,0 +1,64 @@
+﻿@model ConstructionApp.ViewModels.PresenceDailyViewModel
+
+<div class="modal-header">
+    <h5 class="modal-title" id="presenceModalLabel">Create</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+<form asp-action="Create" method="post" id="createForm">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Date">Data</label>
+        <input asp-for="Date" class="form-control" />
+    </div>
+     <input asp-for="WorkSiteId" type="hidden" />
+
+    <table class="table table-bordered" id="employeeTable">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>HS</th>
+                <th>HR</th>
+                <th>Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(Model.Employees != null){
+                for (int i = 0; i < Model.Employees.Count; i++)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            <div class="d-flex justify-content-center">
+                            <input asp-for="@Model.Employees[i].IsPresent"
+                                    type="checkbox"
+                                    class="presence-checkbox"
+                                    data-row="@i" 
+                                    style="transform: scale(1.25);"
+                                    />
+                            </div>
+                            <input type="hidden" asp-for="@Model.Employees[i].EmployeeId" />
+                        </td>
+                        <td class="align-middle"><div>@Model.Employees[i].EmployeeName</div></td>
+                        <td>
+                            <input asp-for="@Model.Employees[i].HS" class="form-control presence-input" />
+                        </td>
+                        <td>
+                            <input asp-for="@Model.Employees[i].HR" class="form-control presence-input" />
+                        </td>
+                        <td>
+                            <input asp-for="@Model.Employees[i].Cost" class="form-control presence-input" />
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</form>
+</div>
+ <div class="modal-footer">
+    <button type="submit" form="createForm" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+</div>
+ 

@@ -1,0 +1,19 @@
+﻿@model ConstructionApp.ViewModels.WorkSiteViewModel
+ 
+<form asp-action="Edit" method="post" id="editForm" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="modal-header">
+        <h5 class="modal-title">Update</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    </div>
+
+    <div class="modal-body">
+        @await Html.PartialAsync("_FormFields", Model)
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+    </div>
+</form>

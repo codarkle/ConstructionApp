@@ -1,0 +1,36 @@
+﻿<div class="container mt-4">
+    <h2>Employees</h2>
+    <div class="table-responsive">
+        <table id="mainTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Id</th>
+                    <th>UserName</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Role</th>
+                    <th>Email</th>
+                    <th>Manager</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div> 
+
+
+@await Html.PartialAsync("_ModalLayout") 
+
+<!-- Profile Modal -->
+<div class="modal fade" id="viewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div id="viewContent" class="p-3"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts { 
+     <script src="~/js/employee.js" asp-append-version="true"></script>
+}

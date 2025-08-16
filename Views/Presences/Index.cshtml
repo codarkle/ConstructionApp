@@ -1,0 +1,26 @@
+﻿ <div class="container mt-4">
+    <h2>Presence Record</h2>
+    <div class="table-responsive">
+        <table id="mainTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Id</th>
+                    <th>Data</th>
+                    <th>Manager</th>
+                    <th>Worker</th>
+                    <th>HS</th>
+                    <th>HR</th>
+                    <th>Cost</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@await Html.PartialAsync("_ModalLayout")
+
+@section Scripts {
+    <script src="~/js/presence.js" asp-append-version="true"></script>
+}

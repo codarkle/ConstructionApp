@@ -1,0 +1,21 @@
+﻿@model ConstructionApp.ViewModels.PurchaseViewModel
+
+<form asp-action="Edit" method="post" id="editForm">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="modal-header">
+        <h5 class="modal-title">Edit Purchase</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    </div>
+
+    <div class="modal-body">
+        <!-- Reuse fields same as _Create.cshtml -->
+       <partial name="_FormFields" model="Model" />
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success">Update</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+    </div>
+</form>
+ 

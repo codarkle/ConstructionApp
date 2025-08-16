@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Maintenance Vehicle";
+}
+
+<div class="container mt-4">
+    <h2>Maintenance Vehicle</h2>
+    <div class="table-responsive">
+        <table id="mainTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Id</th>
+                    <th>Vehicle</th>
+                    <th>Plate</th>
+                    <th>Data Out</th>
+                    <th>Km Out</th>
+                    <th>Data In</th>
+                    <th>Km In</th>
+                    <th>Driver</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@await Html.PartialAsync("_ModalLayout")
+
+<!-- View Modal -->
+<div class="modal fade" id="viewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div id="viewContent" class="p-3"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/maintenance.js" asp-append-version="true"></script>
+}

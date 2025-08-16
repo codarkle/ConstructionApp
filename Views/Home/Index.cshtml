@@ -1,0 +1,86 @@
+﻿@using ConstructionApp.Helpers
+@model ConstructionApp.ViewModels.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/alarm.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/table.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/worksite.css" asp-append-version="true" />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<link href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="//cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+
+<header>
+    <partial name="_NavbarPartial" />
+</header>
+  
+<main role="main" class="container my-4" >
+    <div class="properties" id="workSiteCards">
+        @if (Model.WorkSiteCards == null)
+        {
+            <h2>There is no active worksite.</h2>
+        }
+        else{
+            foreach (var site in Model.WorkSiteCards)
+            {
+                if (User.IsInRole("Admin") || User.IsInRole("Surveyor") || User.IsInRole("Manager") || User.IsInRole("Supplier"))
+                {
+                      <div class="card" data-id="@site.Id" onclick="localStorage.setItem('selectedWorkSiteId', '@site.Id'); location.href='/WorkSites/SiteManage/@site.Id';">
+                        <div class="property-image">
+                            <img src="@(!string.IsNullOrEmpty(site.Picture) ? Url.Content(site.Picture) : "/images/worksite.svg")" alt="NoPhoto">
+                        </div>
+                        <div class="card-content">
+                            <div class="card-title">@site.Name (@site.Address)</div>
+                            <div class="card-icons">
+                                <i class="fas fa-truck mr-1 text-gray-600"></i> @CurrencyHelper.FormatEuro(@site.Amount)
+                                <i class="fas fa-hard-hat mr-1 text-orange-500"></i>@CurrencyHelper.FormatEuro(site.Safety)
+                                <i class="fas fa-coins mr-1 text-yellow-500"></i>@CurrencyHelper.FormatEuro(site.Amount + site.Safety - site.MaterialCost - site.WorkerSalary)
+                            </div>
+                            <div class="card-price">
+                                @site.ManagerName
+                            </div>
+                            @{
+                                var daysLeft = DateTime.Today.AddDays(15) - site.DateEnd;
+                                string badgeClass;
+                                if (DateTime.Today > site.DateEnd) { badgeClass = "text-primary"; }
+                                else if (DateTime.Today.AddDays(15) > site.DateEnd) { badgeClass = "text-danger"; }
+                                else { badgeClass = "text-dark"; }
+                            }
+                            <div class="card-deadline @badgeClass">
+                                @site.DateStart.ToString("dd/MM/yyyy") ~ @site.DateEnd.ToString("dd/MM/yyyy")
+                            </div>
+                        </div>
+                    </div>
+                }
+                else if (User.IsInRole("Worker"))
+                {
+                    <div class="card" data-id="@site.Id"  style="cursor:default;">
+                        <img src="@(!string.IsNullOrEmpty(site.Picture) ? Url.Content(site.Picture) : "/images/worksite.svg")" alt="NoPhoto">
+                        <div class="card-content">
+                            <div class="card-title">@site.Name (@site.Address)</div> 
+                            <div class="card-deadline">
+                                @site.DateStart.ToString("dd/MM/yyyy") ~ @site.DateEnd.ToString("dd/MM/yyyy")
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        }
+    </div>
+</main> 
+
+@await Component.InvokeAsync("Footer")
+
+@section Scripts { 
+    <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="~/js/alarm.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,49 @@
+﻿@model ConstructionApp.ViewModels.MaintenanceViewModel
+
+<div class="row g-2">
+    <div class="col-6">
+        <label asp-for="VehicleId" class="form-label">Vehicle</label>
+            <select asp-for="VehicleId" asp-items="Model.VehicleList" class="form-select" id="VehicleId">
+            <option value="">-- Select Vehicle --</option>
+        </select>
+        <span asp-validation-for="VehicleId" class="text-danger"></span>
+    </div>
+    <div class="col-6">
+        <label asp-for="Driver" class="form-label">Driver</label>
+        <input asp-for="Driver" class="form-control" />
+        <span asp-validation-for="Driver" class="text-danger"></span>
+    </div> 
+<div>
+<div class="row g-2 mb-3">
+    <div class="col-12">
+        <label asp-for="Description" class="form-label">Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-6">
+        <label asp-for="DateOut" class="form-label">Uscito alle</label>
+        <input asp-for="DateOut" class="form-control" type="date" />
+        <span asp-validation-for="DateOut" class="text-danger"></span>
+    </div>
+
+    <div class="col-6">
+        <label asp-for="KmOut" class="form-label">Km Out</label>
+        <input asp-for="KmOut" class="form-control" />
+        <span asp-validation-for="KmOut" class="text-danger"></span>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-6">
+        <label asp-for="DateIn" class="form-label">Rientrato Alle</label>
+        <input asp-for="DateIn" class="form-control" type="date" />
+        <span asp-validation-for="DateIn" class="text-danger"></span>
+    </div>
+
+    <div class="col-6">
+        <label asp-for="KmIn" class="form-label">Km In</label>
+        <input asp-for="KmIn" class="form-control" />
+        <span asp-validation-for="KmIn" class="text-danger"></span>
+    </div> 
+</div>

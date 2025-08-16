@@ -1,0 +1,13 @@
+﻿<div class="container mt-4">
+    <h2>Purchase Record</h2>
+    <div class="table-responsive">
+        <table id="mainTable" class="table table-bordered table-striped">
+        </table>
+    </div>
+</div> 
+
+@await Html.PartialAsync("_ModalLayout")
+
+@section Scripts {
+    <script src="~/js/purchase.js" asp-append-version="true"></script>
+}

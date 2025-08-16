@@ -1,0 +1,44 @@
+﻿@model ConstructionApp.ViewModels.PurchaseViewModel
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<input asp-for="WorkSiteId" type="hidden" />
+</div>
+<div class="row g-2 mb-3">
+    <div class="col-md-6"> 
+        <label asp-for="MaterialId" class="form-label">Material</label>
+        <select asp-for="MaterialId" class="form-select" asp-items="Model.Materials">
+            <option value="">-- Select Material --</option>
+        </select>
+        <span asp-validation-for="MaterialId" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="SupplierId" class="form-label">Supplier</label>
+        <select asp-for="SupplierId" class="form-select" asp-items="Model.Suppliers">
+            <option value="">-- Select Supplier --</option>
+        </select>
+        <span asp-validation-for="SupplierId" class="text-danger"></span>
+    </div>
+</div>
+<div class="row g-2">
+    <div class="col-md-6">
+        <label asp-for="Quantity" class="form-label">Quantity</label>
+        <input asp-for="Quantity" class="form-control" type="number"/>
+        <span asp-validation-for="Quantity" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Amount" class="form-label">Amount</label>
+        <input asp-for="Amount" class="form-control" type="number"/>
+        <span asp-validation-for="Amount" class="text-danger"></span>
+    </div>
+<div class="row g-2">
+    <div class="col-md-6">
+        <label asp-for="DateDoc" class="form-label">DateDoc</label>
+        <input asp-for="DateDoc" class="form-control" type="date" />
+        <span asp-validation-for="DateDoc" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="DocNumber" class="form-label">DocNumber</label>
+        <input asp-for="DocNumber" class="form-control" />
+        <span asp-validation-for="DocNumber" class="text-danger"></span>
+    </div>
+</div>

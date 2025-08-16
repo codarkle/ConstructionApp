@@ -1,0 +1,28 @@
+﻿<div class="container mt-4">
+    <h2>WorkSite Management</h2>
+    <div class="table-responsive">
+        <table id="mainTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>CAP</th>
+                    <th>Manager</th>
+                    <th>Amount</th>
+                    <th>Security</th>
+                    <th>DateStart</th>
+                    <th>DateEnd</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@await Html.PartialAsync("_ModalLayout")
+
+@section Scripts { 
+    <script src="~/js/worksite.js" asp-append-version="true"></script> 
+}

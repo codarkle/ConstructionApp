@@ -1,0 +1,36 @@
+﻿@using ConstructionApp.Helpers
+@model WorkSite
+@{
+    ViewData["Title"] = "Analisi Manager";
+}
+<link rel="stylesheet" href="~/css/worksite.css" asp-append-version="true" />
+ 
+<div class="container my-5">
+    <h2>WorkSite Management</h2>
+    <div class="row property-card">
+        <div class="col-md-6 property-image">
+            <img src="@Url.Content(!string.IsNullOrEmpty(Model.Picture) ? Url.Content("~/"+Model.Picture) : "~/images/worksite.svg")" alt="Property Image">
+        </div>
+
+        <div class="col-md-6 p-4">
+            <h5 class="fw-bold">@Model.Name</h5>
+            <p class="text-muted mb-2">@Model.Address - @Model.CAP</p>
+
+            <div class="mb-3">
+                <span class="badge rounded-pill badge-custom"><i class="fas fa-car me-1"></i> @Model.DateStart.ToString("dd/MM/yyy")</span>
+                <span class="badge rounded-pill badge-custom"><i class="fas fa-bath me-1"></i> @Model.DateEnd.ToString("dd/MM/yyy")</span>
+            </div>
+
+            <div class="price text-primary mb-1">@CurrencyHelper.FormatEuro(Model.Amount)</div>
+            <div class="text-muted mb-3">
+                <span class="px-3">Safety: @CurrencyHelper.FormatEuro(Model.Safety)</span>
+                <span class="px-3">Net Profit: @CurrencyHelper.FormatEuro(@ViewBag.NetProfit)</span>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button class="btn btn-outline-primary" onclick="location.href='/Presences'">Presence</button> 
+                <button class="btn btn-outline-primary" onclick="location.href='/Maintenances'">Maintenance</button> 
+            </div>
+        </div>
+    </div>
+</div>

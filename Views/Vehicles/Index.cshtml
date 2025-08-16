@@ -1,0 +1,25 @@
+﻿<div class="container mt-4">
+    <h2>Vehicle Management</h2>
+    <div class="table-responsive">
+        <table id="mainTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Id</th>
+                    <th>Descrizioen</th>
+                    <th>Plate</th>
+                    <th>Insurance</th>
+                    <th>Revision</th>
+                    <th>Maintenance</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+ 
+@await Html.PartialAsync("_ModalLayout")
+
+@section Scripts { 
+    <script src="~/js/vehicle.js" asp-append-version="true"></script> 
+}

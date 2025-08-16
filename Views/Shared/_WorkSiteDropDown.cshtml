@@ -1,0 +1,13 @@
+﻿<div class="d-flex align-items-center">
+    <span id="workSiteLabel">WorkSite:</span>
+    @if(User.IsInRole("Admin") || User.IsInRole("Surveyor")){
+        <select id="workSiteDropDown" class="form-select mx-1" style="max-width: 150px;">
+            <option value="0">All</option>
+        </select>
+    }
+    else if(User.IsInRole("Manager"))
+    {
+        <select id="workSiteDropDown" class="form-select mx-3" style="max-width: 150px;" disabled>
+        </select>
+    }
+</div>

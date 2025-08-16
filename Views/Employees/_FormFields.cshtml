@@ -1,0 +1,151 @@
+﻿@model ConstructionApp.ViewModels.RegisterViewModel
+
+@Html.AntiForgeryToken()
+<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+<div class="row">
+    <div class="col-md-6 p-3">
+        <div class="row mb-3 align-items-center">
+            <label asp-for="WorkSiteId" class="col-sm-4 col-form-label ">Manager</label>
+            <div class="col-sm-8">
+                <select asp-for="WorkSiteId" asp-items="Model.WorkSites" class="form-select">
+                    <option value="">-- Select Manager --</option>
+                </select>
+                <span asp-validation-for="WorkSiteId" class="text-danger small"></span>
+            </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+            <label asp-for="Id_Role" class="col-sm-4 col-form-label ">Role</label>
+            <div class="col-sm-8">
+                <select asp-for="Id_Role" class="form-select">
+                    <option value="" selected>-- Select --</option>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <option value="2">Geometra</option>
+                    }
+                    <option value="3">Manager</option>
+                    <option value="4">Worker</option>
+                    <option value="5">Supplier</option>
+                </select>
+                <span asp-validation-for="Id_Role" class="text-danger small"></span>
+            </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+            <label asp-for="UserName" class="col-sm-4 col-form-label "></label>
+            <div class="col-sm-8">
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger small"></span>
+            </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+            <label asp-for="FullName" class="col-sm-4 col-form-label ">Name completo</label>
+            <div class="col-sm-8">
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger small"></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 p-3">
+        <div class="d-flex align-items-center justify-content-center flex-column h-100 border border-primary rounded">
+            <div id="dropZone" class="text-center p-2" style="cursor: pointer;">
+                <input type="file" asp-for="Avatar" id="pictureInput" accept="image/*" style="display:none;" />
+                <div id="previewContainer">
+                    <img id="picturePreview" src="@(!string.IsNullOrEmpty(Model.AvatarUrl) ? Url.Content(Model.AvatarUrl) : "/images/avatar.svg")"
+                    alt="Avatar Preview" style="max-width: 200px;" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 p-3">
+        <div class="row mb-3 align-items-center">
+            <label asp-for="Email" class="col-sm-4 col-form-label "></label>
+            <div class="col-sm-8">
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger small"></span>
+            </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+            <label asp-for="Password" class="col-sm-4 col-form-label "></label>
+            <div class="col-sm-8">
+                <input asp-for="Password" class="form-control" type="text" />
+                <span asp-validation-for="Password" class="text-danger small"></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 p-3">
+        <div class="row mb-3 align-items-center">
+            <label asp-for="Address" class="col-sm-4 col-form-label ">Address</label>
+            <div class="col-sm-8">
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger small"></span>
+            </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+            <label asp-for="PhoneNumber" class="col-sm-4 col-form-label ">Telefono</label>
+            <div class="col-sm-8">
+                <input asp-for="PhoneNumber" type="number" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<!-- File Upload Section -->
+<div class="mb-3 d-flex align-items-center">
+    <label class="form-label me-3">Attach</label>
+    <button type="button" id="btnAddFile" class="btn btn-outline-primary btn-sm">+ Add File</button>
+    <div id="dynamicFileInputs"></div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered" id="filesTable">
+        <thead class="table-light">
+            <tr>
+                <th>FileName</th>
+                <th>Description</th>
+                <th>Scadenza</th>
+                <th>Rinnovato</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.AttachFiles.Count; i++)
+            {
+                var displayStyle = Model.AttachFiles[i].Dumped || Model.AttachFiles[i].Renewed ? "display:none;" : "";
+                    <tr data-index="@i" style="@displayStyle">
+                        <td>
+                            <input asp-for="@Model.AttachFiles[i].FileName" type="text" class="form-control" />
+                            <span asp-validation-for="@Model.AttachFiles[i].FileName" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="@Model.AttachFiles[i].Description" type="text" class="form-control" />
+                            <span asp-validation-for="@Model.AttachFiles[i].Description" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="@Model.AttachFiles[i].Deadline" type="date" class="form-control" />
+                            <span asp-validation-for="@Model.AttachFiles[i].Deadline" class="text-danger"></span>
+                        </td>
+                        <td class="align-middle">
+                            <div class="form-check d-flex justify-content-center">
+                                <input asp-for="@Model.AttachFiles[i].Renewed" type="checkbox" class="form-check-input" style="transform: scale(1.25);" />
+                            </div>
+                            <input asp-for="@Model.AttachFiles[i].Dumped" type="hidden"/>
+                        </td>
+                        <td class="d-flex">
+                            <input asp-for="@Model.AttachFiles[i].TempId" type="hidden"/>
+                            <input asp-for="@Model.AttachFiles[i].StoredFilePath" type="hidden"/>
+                            <button type="button" class="btn btn-info btn-sm view-file">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm remove-row">
+                                <i class="bi bi-trash"></i> 
+                            </button>
+                        </td>
+                    </tr>
+            } 
+        </tbody>
+    </table>
+</div> 

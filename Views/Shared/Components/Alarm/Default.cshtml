@@ -1,0 +1,11 @@
+﻿@model ConstructionApp.ViewModels.AlarmViewModel;
+ 
+<!-- Notifications --> 
+<button type="button" class="btn btn-light position-relative" data-bs-toggle="modal" data-bs-target="#alarmModal" aria-label="Notifications"> 
+    <i class="bi bi-bell"></i> 
+    <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="top:8px !important;">
+            @Model.totalCount
+        <span class="visually-hidden">deadline messages</span> 
+    </span> 
+</button>
+ 

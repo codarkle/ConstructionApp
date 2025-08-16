@@ -1,0 +1,19 @@
+﻿@model ConstructionApp.ViewModels.PurchaseViewModel
+
+<form asp-action="Create" method="post" id="createForm">
+    @Html.AntiForgeryToken()
+    <div class="modal-header">
+        <h5 class="modal-title">Create</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    </div>
+
+    <div class="modal-body">
+        @await Html.PartialAsync("_FormFields", Model)
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success">Crea</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+    </div>
+</form>
+ 
